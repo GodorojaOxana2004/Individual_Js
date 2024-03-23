@@ -1,1 +1,61 @@
+1.Чтобы запустить проект, нужно следовать этим инструкциям:
+
+Скопировать предоставленный код и сохранить его в файле с расширением .js.
+Убедится, что у вас установлена среда выполнения JavaScript, например, Node.js.
+Открыть терминал или командную строку.
+Перейти в каталог, где находится ваш файл с кодом.
+Запустить файл с помощью команды node название_файла.js.
+
+2. Описание лабораторной работы:
+Этот проект представляет собой класс TransactionAnalyzer, предназначенный для анализа массива транзакций.
+Он включает методы для добавления новых транзакций, 
+получения различной статистики по транзакциям и фильтрации транзакций по различным критериям.
+
+Краткая документация к проекту:
+TransactionAnalyzer - это класс, который принимает массив транзакций и предоставляет методы для анализа этих транзакций.
+Методы включают добавление новых транзакций, получение всех транзакций, вычисление общей суммы транзакций и многое другое.
+
+// Создание экземпляра класса TransactionAnalyzer
+const transactionAnalyzer = new TransactionAnalyzer(transactions);
+// Получение всех транзакций
+console.log(transactionAnalyzer.getAllTransactions());
+// Добавление новой транзакции
+transactionAnalyzer.addTransaction("2024-03-23", 50.0, "debit", "Grocery shopping", "Grocery Store", "Visa");
+// Получение уникальных типов транзакций
+console.log(transactionAnalyzer.getUniqueTransactionType());
+// Вычисление общей суммы транзакций
+console.log(transactionAnalyzer.calculateTotalAmount());
+// Вычисление общей суммы транзакций по дате
+console.log(transactionAnalyzer.calculateTotalAmountByDate("2024", "03", "23"));
+// Получение транзакций определенного типа
+console.log(transactionAnalyzer.getTransactionByType("debit"));
+// Получение транзакций в заданном диапазоне дат
+console.log(transactionAnalyzer.getTransactionsInDateRange("2024-03-01", "2024-03-31"));
+// Получение транзакций по имени продавца
+console.log(transactionAnalyzer.getTransactionsByMerchant("Grocery Store"));
+// Вычисление средней суммы транзакций
+console.log(transactionAnalyzer.calculateAverageTransactionAmount());
+// Получение транзакций в заданном диапазоне сумм
+console.log(transactionAnalyzer.getTransactionsByAmountRange(10, 100));
+// Вычисление общей суммы дебетовых транзакций
+console.log(transactionAnalyzer.calculateTotalDebitAmount());
+// Нахождение месяца с наибольшим количеством транзакций
+console.log(transactionAnalyzer.findMostTransactionsMonth());
+// Нахождение месяца с наибольшим количеством дебетовых транзакций
+console.log(transactionAnalyzer.findMostDebitTransactionMonth());
+// Определение типа транзакции с наибольшим количеством операций
+console.log(transactionAnalyzer.mostTransactionTypes());
+// Получение транзакций, совершенных до указанной даты
+console.log(transactionAnalyzer.getTransactionsBeforeDate("2024-03-20"));
+// Нахождение транзакции по ID
+console.log(transactionAnalyzer.findTransactionById('5'));
+// Возвращает описания всех транзакций
+console.log(transactionAnalyzer.mapTransactionDescriptions());
+
+3.Контрольные вопросы
+Какие примитивные типы данных существуют в JavaScript?
+Какие методы массивов вы использовали для обработки и анализа данных в вашем приложении, и как они помогли в выполнении задачи?
+В чем состоит роль конструктора класса?
+Каким образом вы можете создать новый экземпляр класса в JavaScript?
+
 

@@ -394,6 +394,8 @@ console.log(transactionAnalyzer1.getTransactionsBeforeDate("2019-01-05"));
 //                  0     1       2
 // masiv.lenght = 3
 // masiv[masiv.lenght - 1]
+
+
 /*Контрольные вопросы
 
 1.Какие примитивные типы данных существуют в JavaScript?

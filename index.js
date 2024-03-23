@@ -334,7 +334,7 @@ getTransactionsBeforeDate(date){
      * @param {string} id - ID транзакции.
      * @return {Object} Транзакция с указанным ID.
      */
-        //что-то не так
+
 findTransactionById(id){
             for (let i = 0; i < transactions.length - 1; i++) {
             if (id === transactions[i].transaction_id){
@@ -346,7 +346,7 @@ findTransactionById(id){
         * Возвращает описания всех транзакций.
         * @return {Array} Массив описаний всех транзакций.
         */
-//что-то не так
+
 mapTransactionDescriptions(){
     let descript = []; // Создаем пустой массив для хранения описаний транзакций
 

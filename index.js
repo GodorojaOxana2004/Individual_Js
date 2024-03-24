@@ -11,8 +11,8 @@ class TransactionAnalyzer {
      * Создает новый экземпляр TransactionAnalyzer.
      * @param {Array} transactions - Массив транзакций.
      */
-    constructor(transactions) {
-        this.transactions = transactions;
+    constructor(transactions_) {
+        this.transactions = transactions_;
     }
 
     /**

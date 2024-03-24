@@ -368,7 +368,7 @@ return descript; // Возвращаем массив описаний
 
 
 // для проверки
-const transactionAnalyzer1 = new TransactionAnalyzer(transactions);
+const transactionAnalyzer1 = new TransactionAnalyzer(this.transactions);
 
 console.log(transactionAnalyzer1.getAllTransactions());
 

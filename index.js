@@ -1,7 +1,7 @@
-const transactions = require('./transactions.json');
+const transactions_ = require('./transactions.json');
 
-for(let i = 0; i < transactions.length - 1;i++){ // В каждую транзакцию необходимо добавить метод string()
-    transactions[i].string = function string() {
+for(let i = 0; i < transactions_.length - 1;i++){ // В каждую транзакцию необходимо добавить метод string()
+    transactions_[i].string = function string() {
         return JSON.stringify(this); //JSON.stringify — для преобразования объектов в JSON.
     }
 }
@@ -27,7 +27,7 @@ class TransactionAnalyzer {
 
     addTransaction(transaction_date, transaction_amount, transaction_type, transaction_description, merchant_name, card_type) {
 
-        let transaction_id = String(Number(transactions[transactions.length-1].transaction_id)+1);
+        let transaction_id = String(Number(this.transactions[this.transactions.length-1].transaction_id)+1);
 
         const transaction = {
             transaction_id: transaction_id,
@@ -60,8 +60,8 @@ class TransactionAnalyzer {
 
     getUniqueTransactionType(){
         let uniquetypes = new Set()
-        for(let i = 0; i < transactions.length - 1;i++){
-            uniquetypes.add(transactions[i].transaction_type);
+        for(let i = 0; i < this.transactions.length - 1;i++){
+            uniquetypes.add(this.transactions[i].transaction_type);
         }
         return uniquetypes;
     }
@@ -73,8 +73,8 @@ class TransactionAnalyzer {
 
     calculateTotalAmount(){
         let total=0;
-        for(let i = 0; i < transactions.length - 1;i++){
-            total += transactions[i].transaction_amount;
+        for(let i = 0; i < this.transactions.length - 1;i++){
+            total += this.transactions[i].transaction_amount;
         }
         return total;
     }
@@ -90,13 +90,13 @@ class TransactionAnalyzer {
     calculateTotalAmountByDate(year, month, day){
         let date;
         let total1=0;
-        for(let i = 0; i < (transactions.length - 1);i++){
-            date = transactions[i].transaction_date.split("-");
+        for(let i = 0; i < (this.transactions.length - 1);i++){
+            date = this.transactions[i].transaction_date.split("-");
             let year1= date[0];
             let month1= date[1];
             let day1= date[2];
             if (((year1===year) || !year) && ((month1 === month) || (!month)) && ( (day1===day) || !day)){
-                total1 += transactions[i].transaction_amount;
+                total1 += this.transactions[i].transaction_amount;
             } /*else if ((year1===year) && (month1 === month)){
                 total1 += transactions[i].transaction_amount;
             } else if ((month1 === month) && ( day1===day)){
@@ -122,9 +122,9 @@ class TransactionAnalyzer {
 
     getTransactionByType(type){
         let set1 = new Set();
-        for(let i = 0; i < transactions.length - 1;i++){
-           if (type === transactions[i].transaction_type ){
-            set1.add(transactions[i]);
+        for(let i = 0; i < this.transactions.length - 1;i++){
+           if (type === this.transactions[i].transaction_type ){
+            set1.add(this.transactions[i]);
            }
         } 
         return set1;
@@ -140,10 +140,10 @@ class TransactionAnalyzer {
     getTransactionsInDateRange(startDate, endDate){
         let set = new Set();
         
-        for (let i = 0; i < transactions.length-1; i++) {
-            let rangetrans = transactions[i].transaction_date;
+        for (let i = 0; i < this.transactions.length-1; i++) {
+            let rangetrans = this.transactions[i].transaction_date;
             if (startDate<=rangetrans && endDate>=rangetrans){
-                set.add(transactions[i]);
+                set.add(this.transactions[i]);
             }
         
     }return set;
@@ -158,10 +158,10 @@ class TransactionAnalyzer {
 
 getTransactionsByMerchant(merchantName){
     let set = new Set();
-    for(let i = 0; i < transactions.length - 1;i++){
-        let name = transactions[i].merchant_name;
+    for(let i = 0; i < this.transactions.length - 1;i++){
+        let name = this.transactions[i].merchant_name;
         if ( name === merchantName){
-            set.add(transactions[i]);
+            set.add(this.transactions[i]);
         }
      }  return set;
 }
@@ -174,8 +174,8 @@ calculateAverageTransactionAmount(){
     let sred_znak=0;
     let amount=transactions.length;
     let total=0;
-    for(let i = 0; i < transactions.length - 1;i++){
-        total += transactions[i].transaction_amount;
+    for(let i = 0; i < this.transactions.length - 1;i++){
+        total += this.transactions[i].transaction_amount;
     }
     sred_znak = total/amount;
     return sred_znak;
@@ -193,8 +193,8 @@ calculateAverageTransactionAmount(){
 getTransactionsByAmountRange(minAmount, maxAmount) {
     let totalAmount = 0;
 
-    for (let i = 0; i < transactions.length-1; i++) {
-        let amount = transactions[i].transaction_amount;
+    for (let i = 0; i < this.transactions.length-1; i++) {
+        let amount = this.transactions[i].transaction_amount;
         if (amount >= minAmount && amount <= maxAmount) {
 
             totalAmount += amount; 
@@ -212,9 +212,9 @@ getTransactionsByAmountRange(minAmount, maxAmount) {
 calculateTotalDebitAmount(){
     let totalDebitAmount = 0;
 
-    for(let i = 0; i < transactions.length - 1;i++){
-       if (transactions[i].transaction_type === 'debit') {
-        totalDebitAmount += transactions[i].transaction_amount;
+    for(let i = 0; i < this.transactions.length - 1;i++){
+       if (this.transactions[i].transaction_type === 'debit') {
+        totalDebitAmount += this.transactions[i].transaction_amount;
     }
 } return totalDebitAmount
     } 
@@ -224,24 +224,25 @@ calculateTotalDebitAmount(){
      * @return {number} Месяц с наибольшим количеством транзакций.
      */
 findMostTransactionsMonth(){
-        let maxDebitAmountCurr = 0;
-        let maxDebitAmountLast = 0;
+        let maxTransactionsAmountCurr = 0;
+        let maxTransactionsAmountLast = 0;
         let mostTransactionsMonth = 0;
         let last_month = 0;
-        for (let i = 0; i < transactions.length - 1; i++){
-            let date1 = transactions[i].transaction_date.split("-");
+
+        for (let i = 0; i < this.transactions.length - 1; i++){
+            let date1 = this.transactions[i].transaction_date.split("-");
             let month = Number(date1[1]);
             
-            if (last_month === month) {
-                maxDebitAmountCurr += transactions[i].transaction_amount;
+            if (last_month === month) { // проверям, если в предыдущий день был тот же месяц
+                maxTransactionsAmountCurr++;
             }
-            else if(maxDebitAmountLast > maxDebitAmountCurr){
-                maxDebitAmountCurr = 0;
+            else if(maxTransactionsAmountLast > maxTransactionsAmountCurr){ // проверяем, если за предыдущий месяц было больше тр. чем за нынешний
+                maxTransactionsAmountCurr = 0;
             }
-            else{
+            else{ // если за нынешний было больше, чем за предыдущий, обнавляем месяц в котором больше всего транзакций
                 mostTransactionsMonth = month - 1;
-                maxDebitAmountLast = maxDebitAmountCurr;
-                maxDebitAmountCurr = transactions[i].transaction_amount;
+                maxTransactionsAmountLast = maxTransactionsAmountCurr;
+                maxTransactionsAmountCurr = 1;
             }
             last_month = Number(date1[1]);
         }
@@ -257,23 +258,23 @@ findMostDebitTransactionMonth(){
         let maxDebitAmountLast = 0;
         let mostTransactionsMonth = 0;
         let last_month = 0;
-        for (let i = 0; i < transactions.length - 1; i++){
-            let date1 = transactions[i].transaction_date.split("-");
+        for (let i = 0; i < this.transactions.length - 1; i++){
+            let date1 = this.transactions[i].transaction_date.split("-");
             let month = Number(date1[1]);
             
-            if (last_month === month) {
-                if(transactions[i].transaction_type === 'debit'){
-                    maxDebitAmountCurr += transactions[i].transaction_amount;
+            if (last_month === month) { // проверям, если в предыдущий день был тот же месяц
+                if(this.transactions[i].transaction_type === 'debit'){
+                    maxDebitAmountCurr++;
                 }
             }
-            else if(maxDebitAmountLast > maxDebitAmountCurr){
+            else if(maxDebitAmountLast > maxDebitAmountCurr){// проверяем, если за предыдущий месяц было больше тр. чем за нынешний
                 maxDebitAmountCurr = 0;
             }
-            else{
+            else{ // если за нынешний было больше, чем за предыдущий, обнавляем месяц в котором больше всего транзакций
                 mostTransactionsMonth = month - 1;
                 maxDebitAmountLast = maxDebitAmountCurr;
-                if(transactions[i].transaction_type === 'debit'){
-                    maxDebitAmountCurr = transactions[i].transaction_amount;
+                if(this.transactions[i].transaction_type === 'debit'){
+                    maxDebitAmountCurr = 1;
                 }
                 else{
                     maxDebitAmountCurr = 0;
@@ -293,10 +294,10 @@ findMostDebitTransactionMonth(){
         mostTransactionTypes(){
             let debitCount = 0;
             let creditCount = 0;
-            for (let i = 0; i < transactions.length - 1; i++) {
-                if (transactions[i].transaction_type == 'debit') {
+            for (let i = 0; i < this.transactions.length - 1; i++) {
+                if (this.transactions[i].transaction_type == 'debit') {
                     debitCount++;
-                } else if (transactions[i].transaction_type  == 'credit') {
+                } else if (this.transactions[i].transaction_type  == 'credit') {
                     creditCount++;
                 }
             }
@@ -320,8 +321,8 @@ getTransactionsBeforeDate(date){
             let result = [];
             let targetDate = new Date(date);
             //console.log(targetDate);
-            for (let transact of transactions) {
-                let transactionDate = new Date(transactions.transaction_date);
+            for (let transact of this.transactions) {
+                let transactionDate = new Date(this.transactions.transaction_date);
                 if (transactionDate < targetDate) {
                     result.push(transact);
                 }
@@ -336,9 +337,9 @@ getTransactionsBeforeDate(date){
      */
 
 findTransactionById(id){
-            for (let i = 0; i < transactions.length - 1; i++) {
-            if (id === transactions[i].transaction_id){
-                return transactions[i];
+            for (let i = 0; i < this.transactions.length - 1; i++) {
+            if (id === this.transactions[i].transaction_id){
+                return this.transactions[i];
             }}
         }
 
@@ -351,10 +352,10 @@ mapTransactionDescriptions(){
     let descript = []; // Создаем пустой массив для хранения описаний транзакций
 
 // Проходим по каждой транзакции
-for (let i = 0; i < transactions.length - 1; i++) {
+for (let i = 0; i < this.transactions.length - 1; i++) {
     // Проверяем, есть ли у текущей транзакции описание
-    if (transactions[i].transaction_description) {
-        descript.push(transactions[i].transaction_description); // Добавляем описание в массив
+    if (this.transactions[i].transaction_description) {
+        descript.push(this.transactions[i].transaction_description); // Добавляем описание в массив
     }
 
 }

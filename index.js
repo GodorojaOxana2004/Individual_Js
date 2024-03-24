@@ -172,7 +172,7 @@ getTransactionsByMerchant(merchantName){
      */
 calculateAverageTransactionAmount(){
     let sred_znak=0;
-    let amount=transactions.length;
+    let amount=this.transactions.length;
     let total=0;
     for(let i = 0; i < this.transactions.length - 1;i++){
         total += this.transactions[i].transaction_amount;

@@ -89,7 +89,7 @@ class TransactionAnalyzer {
 
     calculateTotalAmountByDate(year, month, day){
         let date;
-        let total1=0;
+        let total=0;
         for(let i = 0; i < (this.transactions.length - 1);i++){
             date = this.transactions[i].transaction_date.split("-");
             let year1= date[0];
@@ -97,21 +97,9 @@ class TransactionAnalyzer {
             let day1= date[2];
             if (((year1===year) || !year) && ((month1 === month) || (!month)) && ( (day1===day) || !day)){
                 total1 += this.transactions[i].transaction_amount;
-            } /*else if ((year1===year) && (month1 === month)){
-                total1 += transactions[i].transaction_amount;
-            } else if ((month1 === month) && ( day1===day)){
-                total1 += transactions[i].transaction_amount;
-            } else if ((year1===year) && ( day1===day)){
-                total1 += transactions[i].transaction_amount;
-            }else if (year===year1){
-                total1 += transactions[i].transaction_amount;
-            } else if (month1===month){
-                total1 += transactions[i].transaction_amount;
-            } else if (day===day1) {
-                total1 += transactions[i].transaction_amount;
-            }*/
+            }
         }
-        return total1;
+        return total;
     }
 
     /**
@@ -121,13 +109,13 @@ class TransactionAnalyzer {
      */
 
     getTransactionByType(type){
-        let set1 = new Set();
+        let set = new Set();
         for(let i = 0; i < this.transactions.length - 1;i++){
            if (type === this.transactions[i].transaction_type ){
-            set1.add(this.transactions[i]);
+            set.add(this.transactions[i]);
            }
         } 
-        return set1;
+        return set;
     }
 
      /**
@@ -171,14 +159,12 @@ getTransactionsByMerchant(merchantName){
      * @return {number} Средняя сумма транзакций.
      */
 calculateAverageTransactionAmount(){
-    let sred_znak=0;
     let amount=this.transactions.length;
     let total=0;
     for(let i = 0; i < this.transactions.length - 1;i++){
         total += this.transactions[i].transaction_amount;
     }
-    sred_znak = total/amount;
-    return sred_znak;
+    return total/amount;
 
 }
 
@@ -188,20 +174,17 @@ calculateAverageTransactionAmount(){
      * @param {number} maxAmount - Максимальная сумма.
      * @return {Set} Множество транзакций в заданном диапазоне сумм.
      */
-//нужно проверить
 
 getTransactionsByAmountRange(minAmount, maxAmount) {
-    let totalAmount = 0;
-
+     let set = new Set();
     for (let i = 0; i < this.transactions.length-1; i++) {
-        let amount = this.transactions[i].transaction_amount;
         if (amount >= minAmount && amount <= maxAmount) {
 
-            totalAmount += amount; 
+          set.push(this.transactions[i]);
         }
     }
 
-    return totalAmount;
+    return set;
 }
 
  /**
@@ -320,7 +303,6 @@ getTransactionsBeforeDate(date){
     
             let result = [];
             let targetDate = new Date(date);
-            //console.log(targetDate);
             for (let transact of this.transactions) {
                 let transactionDate = new Date(this.transactions.transaction_date);
                 if (transactionDate < targetDate) {
@@ -340,7 +322,8 @@ findTransactionById(id){
             for (let i = 0; i < this.transactions.length - 1; i++) {
             if (id === this.transactions[i].transaction_id){
                 return this.transactions[i];
-            }}
+            }
+            }
         }
 
         /** 
@@ -349,13 +332,13 @@ findTransactionById(id){
         */
 
 mapTransactionDescriptions(){
-    let descript = []; // Создаем пустой массив для хранения описаний транзакций
+    let description = []; // Создаем пустой массив для хранения описаний транзакций
 
 // Проходим по каждой транзакции
 for (let i = 0; i < this.transactions.length - 1; i++) {
     // Проверяем, есть ли у текущей транзакции описание
     if (this.transactions[i].transaction_description) {
-        descript.push(this.transactions[i].transaction_description); // Добавляем описание в массив
+        description.push(this.transactions[i].transaction_description); // Добавляем описание в массив
     }
 
 }

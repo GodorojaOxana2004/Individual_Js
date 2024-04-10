@@ -350,28 +350,28 @@ return descript; // Возвращаем массив описаний
 
 
 
-// для проверки
+
 const transactionAnalyzer1 = new TransactionAnalyzer(this.transactions);
 
 console.log(transactionAnalyzer1.getAllTransactions());
 
-//transactionAnalyzer1.addTransaction("2424244",125.0, "debit" );
-//console.log(transactionAnalyzer1.transactions[transactions.length - 1]);
-//console.log(transactionAnalyzer1.getUniqueTransactionType());
-//console.log(transactionAnalyzer1.calculateTotalAmount());
-//console.log(transactionAnalyzer1.calculateTotalAmountByDate("","01",""));
-//console.log(transactionAnalyzer1.getTransactionByType("credit"));
-//console.log(transactionAnalyzer1.getTransactionsInDateRange("2019-01-05","2019-02-12"));
-//console.log(transactionAnalyzer1.getTransactionsByMerchant("BankXYZ"));
-//console.log(transactionAnalyzer1.calculateAverageTransactionAmount());
-//console.log(transactionAnalyzer1.getTransactionsByAmountRange(50, 100));
-//console.log(transactionAnalyzer1.calculateTotalDebitAmount());
-//console.log(transactionAnalyzer1.findMostTransactionsMonth());
-//console.log(transactionAnalyzer1.findMostDebitTransactionMonth());
-//console.log(transactionAnalyzer1.mostTransactionTypes());
+transactionAnalyzer1.addTransaction("2424244",125.0, "debit" );
+console.log(transactionAnalyzer1.transactions[transactions.length - 1]);
+console.log(transactionAnalyzer1.getUniqueTransactionType());
+console.log(transactionAnalyzer1.calculateTotalAmount());
+console.log(transactionAnalyzer1.calculateTotalAmountByDate("","01",""));
+console.log(transactionAnalyzer1.getTransactionByType("credit"));
+console.log(transactionAnalyzer1.getTransactionsInDateRange("2019-01-05","2019-02-12"));
+console.log(transactionAnalyzer1.getTransactionsByMerchant("BankXYZ"));
+console.log(transactionAnalyzer1.calculateAverageTransactionAmount());
+console.log(transactionAnalyzer1.getTransactionsByAmountRange(50, 100));
+console.log(transactionAnalyzer1.calculateTotalDebitAmount());
+console.log(transactionAnalyzer1.findMostTransactionsMonth());
+console.log(transactionAnalyzer1.findMostDebitTransactionMonth());
+console.log(transactionAnalyzer1.mostTransactionTypes());
 console.log(transactionAnalyzer1.getTransactionsBeforeDate("2019-01-05"));
-//console.log(transactionAnalyzer1.findTransactionById('5'));
-//console.log(transactionAnalyzer1.mapTransactionDescriptions());
+console.log(transactionAnalyzer1.findTransactionById('5'));
+console.log(transactionAnalyzer1.mapTransactionDescriptions());
 
 
 // const masiv = [book, apple, macbook]
